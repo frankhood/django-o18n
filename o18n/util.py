@@ -10,6 +10,7 @@ from django.utils.translation.trans_real import get_supported_language_variant
 
 
 country_language_prefix_re = re.compile(r'^/([a-z]{2})/(?:([a-z]{2})/)?')
+country_code_prefix_re = re.compile(r'^/(\w+([@-]\w+)?)(/|$)')
 
 _language_maps = None
 
@@ -67,6 +68,26 @@ def reset_caches(**kwargs):
     if kwargs['setting'] in {'COUNTRIES', 'O18N_COUNTRIES', 'LANGUAGES'}:
         _language_maps = None
 
+
+def get_default_country():
+    return list(get_language_maps())[0]
+
+def get_country_from_path(path, strict=False):
+    """
+    Returns the language-code if there is a valid language-code
+    found in the `path`.
+
+    If `strict` is False (the default), the function will look for an alternative
+    country-specific variant when the currently checked is not found.
+    """
+    regex_match = country_code_prefix_re.match(path)
+    if not regex_match:
+        return None
+    country_code = regex_match.group(1)
+    if country_code in list(get_language_maps()):
+        return  country_code
+    else:
+        return None
 
 def get_country_language(request):
     """

@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from django.core import urlresolvers
+from django.urls import resolvers
 
 from .util import get_country_language_prefix
 
@@ -30,4 +30,4 @@ from .util import get_country_language_prefix
 
 def patch():
     """🙈 🙉 🙊"""
-    urlresolvers.get_language = get_country_language_prefix
+    resolvers.get_language = get_country_language_prefix
