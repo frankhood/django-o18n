@@ -1,7 +1,10 @@
 import re
 
-from django.core.urlresolvers import RegexURLResolver, get_resolver
+from django.urls import get_resolver
+
 from django.utils import lru_cache
+from django_extensions.management.commands.show_urls import RegexURLResolver
+
 from . import monkey
 from .util import get_country_language_prefix
 

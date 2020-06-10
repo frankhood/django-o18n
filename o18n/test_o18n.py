@@ -2,7 +2,7 @@ import json
 import warnings
 
 from django.core.exceptions import ImproperlyConfigured
-from django.core.urlresolvers import NoReverseMatch, reverse
+from django.urls import NoReverseMatch, reverse
 from django.test import TestCase
 from django.test.utils import override_settings
 from django.utils import translation
